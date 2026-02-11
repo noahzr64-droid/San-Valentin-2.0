@@ -1,1 +1,177 @@
-# San-Valentin-2.0
+# San-Valentin
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para el amor de mi vida ❤️</title>
+
+<style>
+body{
+    margin:0;
+    font-family: 'Segoe UI', sans-serif;
+    background:#f5e9dc;
+    overflow:hidden;
+}
+
+.container{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    padding:20px;
+    text-align:center;
+}
+
+h1{
+    font-weight:normal;
+    margin-bottom:10px;
+}
+
+p{
+    font-size:18px;
+    margin:10px 0;
+}
+
+.tree{
+    position:relative;
+    margin-top:20px;
+}
+
+.trunk{
+    width:20px;
+    height:120px;
+    background:#8b5a2b;
+    margin:0 auto;
+}
+
+.crown{
+    width:200px;
+    height:200px;
+    background:red;
+    position:relative;
+    transform: rotate(-45deg);
+    margin:0 auto;
+    margin-bottom:-100px;
+    animation: grow 2s ease forwards;
+}
+
+.crown:before,
+.crown:after{
+    content:"";
+    width:200px;
+    height:200px;
+    background:red;
+    border-radius:50%;
+    position:absolute;
+}
+
+.crown:before{
+    top:-100px;
+    left:0;
+}
+
+.crown:after{
+    left:100px;
+    top:0;
+}
+
+@keyframes grow{
+    from{transform: rotate(-45deg) scale(0);}
+    to{transform: rotate(-45deg) scale(1);}
+}
+
+.counter{
+    margin-top:20px;
+    font-size:16px;
+}
+
+.buttons{
+    margin-top:20px;
+}
+
+button{
+    padding:10px 20px;
+    border:none;
+    border-radius:20px;
+    font-size:16px;
+    margin:10px;
+}
+
+.yes{
+    background:#ff4d88;
+    color:white;
+}
+
+.no{
+    background:#ccc;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Para el amor de mi vida ❤️</h1>
+
+<p>
+Si pudiera elegir un lugar seguro, sería a tu lado.<br>
+Cuanto más tiempo estoy contigo, más te amo.<br><br>
+—I Love You!
+</p>
+
+<div class="tree">
+    <div class="crown"></div>
+    <div class="trunk"></div>
+</div>
+
+<div class="counter" id="counter"></div>
+
+<div class="buttons">
+    <h3>¿Quieres ser mi San Valentín?</h3>
+    <button class="yes" onclick="yes()">Sí 💖</button>
+    <button class="no" id="noBtn">No 🙈</button>
+</div>
+
+</div>
+
+<script>
+
+// CAMBIA ESTA FECHA por la fecha en que empezaron
+const startDate = new Date("2025-02-20T00:00:00");
+
+function updateCounter(){
+    const now = new Date();
+    const diff = now - startDate;
+
+    const days = Math.floor(diff / (1000*60*60*24));
+    const hours = Math.floor(diff / (1000*60*60) % 24);
+    const minutes = Math.floor(diff / (1000*60) % 60);
+    const seconds = Math.floor(diff / 1000 % 60);
+
+    document.getElementById("counter").innerHTML =
+    `Mi amor por ti comenzó hace... <br>
+    ${days} días ${hours} horas ${minutes} minutos ${seconds} segundos`;
+}
+
+setInterval(updateCounter,1000);
+updateCounter();
+
+// Botón No escapa
+let noBtn=document.getElementById("noBtn");
+noBtn.addEventListener("mouseover",()=>{
+    noBtn.style.position="absolute";
+    noBtn.style.left=Math.random()*80+"%";
+    noBtn.style.top=Math.random()*80+"%";
+});
+
+function yes(){
+    document.body.innerHTML="<h1 style='text-align:center;margin-top:40%;color:#ff4d88;'>Sabía que dirías que sí ❤️</h1>";
+}
+
+</script>
+
+</body>
+</html>
