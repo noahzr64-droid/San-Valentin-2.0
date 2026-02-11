@@ -1,177 +1,815 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Para el amor de mi vida ❤️</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Quieres ser mi San Valentín?</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<style>
-body{
-    margin:0;
-    font-family: 'Segoe UI', sans-serif;
-    background:#f5e9dc;
-    overflow:hidden;
-}
+        /* ===== CONFIGURACIÓN GENERAL ===== */
+        :root {
+            --primary-color: #FFB6D9;
+            --secondary-color: #FFC0CB;
+            --accent-color: #FF1493;
+            --light-bg: #FFF5F8;
+            --text-color: #8B4B5C;
+        }
 
-.container{
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-    padding:20px;
-    text-align:center;
-}
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #FFF5F8 0%, #FFE4F0 50%, #FFF0F6 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-color);
+            overflow-x: hidden;
+            position: relative;
+        }
 
-h1{
-    font-weight:normal;
-    margin-bottom:10px;
-}
+        /* ===== CONTENEDOR PRINCIPAL ===== */
+        .main-container {
+            width: 100%;
+            max-width: 100%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            position: relative;
+        }
 
-p{
-    font-size:18px;
-    margin:10px 0;
-}
+        /* ===== CORAZONES FLOTANTES DE FONDO ===== */
+        .floating-hearts-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
 
-.tree{
-    position:relative;
-    margin-top:20px;
-}
+        .heart-bg {
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0.1;
+            animation: float-heart 6s ease-in-out infinite;
+        }
 
-.trunk{
-    width:20px;
-    height:120px;
-    background:#8b5a2b;
-    margin:0 auto;
-}
+        @keyframes float-heart {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 0.1;
+            }
+            50% {
+                opacity: 0.2;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(30px) rotate(360deg);
+                opacity: 0.1;
+            }
+        }
 
-.crown{
-    width:200px;
-    height:200px;
-    background:red;
-    position:relative;
-    transform: rotate(-45deg);
-    margin:0 auto;
-    margin-bottom:-100px;
-    animation: grow 2s ease forwards;
-}
+        /* ===== SECCIÓN DE ANIMACIÓN INICIAL ===== */
+        .animation-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
 
-.crown:before,
-.crown:after{
-    content:"";
-    width:200px;
-    height:200px;
-    background:red;
-    border-radius:50%;
-    position:absolute;
-}
+        .drop-container {
+            position: relative;
+            height: 100px;
+            width: 60px;
+            margin-bottom: 50px;
+        }
 
-.crown:before{
-    top:-100px;
-    left:0;
-}
+        .water-drop {
+            position: absolute;
+            width: 20px;
+            height: 25px;
+            background: linear-gradient(135deg, #87CEEB 0%, #4DD0E1 100%);
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(-45deg);
+            left: 50%;
+            margin-left: -10px;
+            top: 0;
+            animation: drop-fall 2s ease-in forwards;
+            opacity: 0;
+        }
 
-.crown:after{
-    left:100px;
-    top:0;
-}
+        @keyframes drop-fall {
+            0% {
+                top: 0;
+                opacity: 1;
+            }
+            100% {
+                top: 80px;
+                opacity: 1;
+            }
+        }
 
-@keyframes grow{
-    from{transform: rotate(-45deg) scale(0);}
-    to{transform: rotate(-45deg) scale(1);}
-}
+        /* ===== ÁRBOL CON CORAZÓN ===== */
+        .tree-container {
+            position: relative;
+            width: 200px;
+            height: 250px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            margin-top: 20px;
+        }
 
-.counter{
-    margin-top:20px;
-    font-size:16px;
-}
+        .tree-trunk {
+            position: absolute;
+            width: 25px;
+            height: 80px;
+            background: linear-gradient(90deg, #8B6F47 0%, #A0826D 50%, #8B6F47 100%);
+            bottom: 0;
+            border-radius: 12px;
+            opacity: 0;
+            animation: grow-trunk 1.5s ease-out 2s forwards;
+        }
 
-.buttons{
-    margin-top:20px;
-}
+        @keyframes grow-trunk {
+            0% {
+                height: 0;
+                opacity: 0;
+            }
+            100% {
+                height: 80px;
+                opacity: 1;
+            }
+        }
 
-button{
-    padding:10px 20px;
-    border:none;
-    border-radius:20px;
-    font-size:16px;
-    margin:10px;
-}
+        .tree-crown {
+            position: absolute;
+            bottom: 65px;
+            opacity: 0;
+            animation: grow-crown 2s ease-out 3.5s forwards;
+        }
 
-.yes{
-    background:#ff4d88;
-    color:white;
-}
+        .heart-crown {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            filter: drop-shadow(0 0 15px rgba(255, 20, 147, 0.3));
+        }
 
-.no{
-    background:#ccc;
-}
-</style>
+        .heart-crown::before,
+        .heart-crown::after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 110px;
+            background: linear-gradient(135deg, #FF69B4 0%, #FF1493 100%);
+            border-radius: 70px 70px 0 0;
+            bottom: 0;
+        }
+
+        .heart-crown::before {
+            left: 35px;
+            transform: translateX(-35px);
+        }
+
+        .heart-crown::after {
+            right: 35px;
+            transform: translateX(35px);
+        }
+
+        @keyframes grow-crown {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* ===== PÉTALOS / CORAZONES PEQUEÑOS ===== */
+        .petals-container {
+            position: absolute;
+            width: 200px;
+            height: 250px;
+            pointer-events: none;
+        }
+
+        .petal-heart {
+            position: absolute;
+            font-size: 1.2rem;
+            animation: float-up 3s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes float-up {
+            0% {
+                opacity: 1;
+                transform: translateY(0) translateX(0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-150px) translateX(var(--tx)) scale(0.8);
+            }
+        }
+
+        /* ===== TEXTO ROMÁNTICO ===== */
+        .romantic-text {
+            font-size: 1.3rem;
+            text-align: center;
+            max-width: 90%;
+            margin-top: 40px;
+            line-height: 1.8;
+            opacity: 0;
+            animation: fade-in-text 1.5s ease-out 5.5s forwards;
+            font-style: italic;
+            color: var(--text-color);
+            text-shadow: 2px 2px 4px rgba(255, 182, 217, 0.5);
+        }
+
+        @keyframes fade-in-text {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== CONTADOR ===== */
+        .countdown-section {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+            opacity: 0;
+            animation: fade-in-text 1.5s ease-out 7s forwards;
+        }
+
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px 20px;
+            background: rgba(255, 182, 217, 0.2);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 182, 217, 0.5);
+            min-width: 70px;
+        }
+
+        .countdown-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .countdown-label {
+            font-size: 0.75rem;
+            color: var(--text-color);
+            margin-top: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ===== PREGUNTA Y BOTONES ===== */
+        .question-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            margin-top: 40px;
+            opacity: 0;
+            animation: fade-in-text 1.5s ease-out 8.5s forwards;
+        }
+
+        .question-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-color);
+            text-align: center;
+            max-width: 90%;
+        }
+
+        .buttons-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(255, 20, 147, 0.2);
+        }
+
+        .btn-yes {
+            background: linear-gradient(135deg, #FF1493 0%, #FFB6D9 100%);
+            color: white;
+        }
+
+        .btn-yes:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(255, 20, 147, 0.4);
+        }
+
+        .btn-yes:active {
+            transform: scale(0.95);
+        }
+
+        .btn-no {
+            background: linear-gradient(135deg, #FFC0CB 0%, #FFE4F0 100%);
+            color: var(--text-color);
+            border: 2px solid var(--accent-color);
+        }
+
+        .btn-no:hover {
+            background: linear-gradient(135deg, #FFE4F0 0%, #FFF5F8 100%);
+        }
+
+        /* ===== RESPUESTA FINAL ===== */
+        .final-response {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(255, 20, 147, 0.1) 0%, rgba(255, 182, 217, 0.1) 100%);
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .final-response.show {
+            display: flex;
+            animation: fade-in-text 0.5s ease-out forwards;
+        }
+
+        .final-message {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            text-align: center;
+            max-width: 90%;
+            text-shadow: 0 0 20px rgba(255, 20, 147, 0.3);
+            animation: pulse-scale 1s ease-out infinite;
+        }
+
+        @keyframes pulse-scale {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 2rem;
+            animation: float-heart-final 4s ease-in infinite;
+            pointer-events: none;
+        }
+
+        @keyframes float-heart-final {
+            0% {
+                opacity: 1;
+                transform: translateY(0) translateX(0) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh) translateX(var(--tx)) rotate(360deg);
+            }
+        }
+
+        /* ===== MÚSICA ===== */
+        .music-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FF1493 0%, #FFB6D9 100%);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 20, 147, 0.3);
+            transition: all 0.3s ease;
+            z-index: 500;
+        }
+
+        .music-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(255, 20, 147, 0.4);
+        }
+
+        .music-toggle:active {
+            transform: scale(0.95);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .romantic-text {
+                font-size: 1.1rem;
+            }
+
+            .question-text {
+                font-size: 1.2rem;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+
+            .countdown-item {
+                min-width: 60px;
+                padding: 10px 15px;
+            }
+
+            .countdown-value {
+                font-size: 1.5rem;
+            }
+
+            .final-message {
+                font-size: 2rem;
+            }
+
+            .music-toggle {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .romantic-text {
+                font-size: 1rem;
+                max-width: 95%;
+            }
+
+            .question-text {
+                font-size: 1.1rem;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.95rem;
+            }
+
+            .countdown-section {
+                gap: 10px;
+            }
+
+            .countdown-item {
+                min-width: 55px;
+                padding: 8px 10px;
+            }
+
+            .countdown-value {
+                font-size: 1.3rem;
+            }
+
+            .countdown-label {
+                font-size: 0.65rem;
+            }
+
+            .final-message {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
-
 <body>
+    <!-- Corazones flotantes de fondo -->
+    <div class="floating-hearts-bg" id="floatingHeartsContainer"></div>
 
-<div class="container">
+    <!-- Contenedor principal -->
+    <div class="main-container">
+        <!-- Sección de animación inicial -->
+        <div class="animation-section">
+            <!-- Contenedor de la gota -->
+            <div class="drop-container">
+                <div class="water-drop"></div>
+            </div>
 
-<h1>Para el amor de mi vida ❤️</h1>
+            <!-- Contenedor del árbol -->
+            <div class="tree-container">
+                <div class="tree-trunk"></div>
+                <div class="tree-crown">
+                    <div class="heart-crown"></div>
+                </div>
+                <div class="petals-container" id="petalsContainer"></div>
+            </div>
 
-<p>
-Si pudiera elegir un lugar seguro, sería a tu lado.<br>
-Cuanto más tiempo estoy contigo, más te amo.<br><br>
-—I Love You!
-</p>
+            <!-- Texto romántico -->
+            <div class="romantic-text" id="romanticText">
+                Cada momento a tu lado es un regalo del corazón.
+            </div>
 
-<div class="tree">
-    <div class="crown"></div>
-    <div class="trunk"></div>
-</div>
+            <!-- Contador regresivo -->
+            <div class="countdown-section">
+                <div class="countdown-item">
+                    <div class="countdown-value" id="days">0</div>
+                    <div class="countdown-label">Días</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-value" id="hours">0</div>
+                    <div class="countdown-label">Horas</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-value" id="minutes">0</div>
+                    <div class="countdown-label">Minutos</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-value" id="seconds">0</div>
+                    <div class="countdown-label">Segundos</div>
+                </div>
+            </div>
 
-<div class="counter" id="counter"></div>
+            <!-- Pregunta y botones -->
+            <div class="question-section">
+                <div class="question-text">
+                    ¿Quieres ser mi San Valentín?
+                </div>
+                <div class="buttons-container">
+                    <button class="btn btn-yes" id="btnYes">Sí 💖</button>
+                    <button class="btn btn-no" id="btnNo">No 🙈</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<div class="buttons">
-    <h3>¿Quieres ser mi San Valentín?</h3>
-    <button class="yes" onclick="yes()">Sí 💖</button>
-    <button class="no" id="noBtn">No 🙈</button>
-</div>
+    <!-- Respuesta final -->
+    <div class="final-response" id="finalResponse">
+        <div class="final-message">
+            ¡Te amo! 💕
+        </div>
+    </div>
 
-</div>
+    <!-- Botón de música -->
+    <button class="music-toggle" id="musicToggle" title="Activar/Desactivar música">🎵</button>
 
-<script>
+    <!-- Audio para música romántica -->
+    <audio id="musicPlayer" loop>
+        <!-- La música se cargará desde una fuente en línea -->
+    </audio>
 
-// CAMBIA ESTA FECHA por la fecha en que empezaron
-const startDate = new Date("2025-02-20T00:00:00");
+    <script>
+        // ===== CONFIGURACIÓN ===== 
+        const CONFIG = {
+            // Fecha desde donde contar (Ej: San Valentín)
+            targetDate: new Date('2026-02-14T00:00:00').getTime(),
+            
+            // Texto romántico personalizable
+            romanticText: 'Cada momento a tu lado es un regalo del corazón.',
+            
+            // Mensaje final personalizable
+            finalMessage: '¡Te amo! 💕',
+            
+            // URL de música romántica (opcional)
+            musicUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'
+        };
 
-function updateCounter(){
-    const now = new Date();
-    const diff = now - startDate;
+        // ===== VARIABLES GLOBALES ===== 
+        let musicActive = false;
+        let dropAnimation = null;
 
-    const days = Math.floor(diff / (1000*60*60*24));
-    const hours = Math.floor(diff / (1000*60*60) % 24);
-    const minutes = Math.floor(diff / (1000*60) % 60);
-    const seconds = Math.floor(diff / 1000 % 60);
+        // ===== FUNCIONES DE INICIALIZACIÓN ===== 
 
-    document.getElementById("counter").innerHTML =
-    `Mi amor por ti comenzó hace... <br>
-    ${days} días ${hours} horas ${minutes} minutos ${seconds} segundos`;
-}
+        /**
+         * Inicializa corazones flotantes de fondo
+         */
+        function initFloatingHearts() {
+            const container = document.getElementById('floatingHeartsContainer');
+            const heartCount = window.innerWidth > 768 ? 8 : 5;
 
-setInterval(updateCounter,1000);
-updateCounter();
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart-bg';
+                heart.textContent = '❤️';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.top = (Math.random() * 50 - 50) + '%';
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                heart.style.animationDuration = (4 + Math.random() * 4) + 's';
+                container.appendChild(heart);
+            }
+        }
 
-// Botón No escapa
-let noBtn=document.getElementById("noBtn");
-noBtn.addEventListener("mouseover",()=>{
-    noBtn.style.position="absolute";
-    noBtn.style.left=Math.random()*80+"%";
-    noBtn.style.top=Math.random()*80+"%";
-});
+        /**
+         * Crea pétalos/corazones pequeños cuando florece el árbol
+         */
+        function createPetals() {
+            const container = document.getElementById('petalsContainer');
+            const petalCount = 15;
 
-function yes(){
-    document.body.innerHTML="<h1 style='text-align:center;margin-top:40%;color:#ff4d88;'>Sabía que dirías que sí ❤️</h1>";
-}
+            for (let i = 0; i < petalCount; i++) {
+                const petal = document.createElement('div');
+                petal.className = 'petal-heart';
+                petal.textContent = '💕';
+                
+                const x = (Math.random() - 0.5) * 150;
+                const delay = 4 + (i * 0.1);
+                
+                petal.style.left = '50%';
+                petal.style.top = '50%';
+                petal.style.setProperty('--tx', x + 'px');
+                petal.style.animationDelay = delay + 's';
+                
+                container.appendChild(petal);
+            }
+        }
 
-</script>
+        /**
+         * Actualiza el contador regresivo
+         */
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = CONFIG.targetDate - now;
 
+            if (distance < 0) {
+                document.getElementById('days').textContent = '0';
+                document.getElementById('hours').textContent = '0';
+                document.getElementById('minutes').textContent = '0';
+                document.getElementById('seconds').textContent = '0';
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+
+        /**
+         * Maneja el botón "Sí"
+         */
+        function handleYesClick() {
+            const finalResponse = document.getElementById('finalResponse');
+            finalResponse.classList.add('show');
+
+            // Crear corazones flotantes finales
+            createFloatingHearts();
+
+            // Reproducir música si está disponible
+            if (musicActive) {
+                const audio = document.getElementById('musicPlayer');
+                audio.play().catch(err => console.log('No se pudo reproducir la música'));
+            }
+        }
+
+        /**
+         * Crea corazones flotantes en la respuesta final
+         */
+        function createFloatingHearts() {
+            const finalResponse = document.getElementById('finalResponse');
+            const heartCount = 20;
+
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                heart.textContent = '❤️';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.top = '100%';
+                heart.style.setProperty('--tx', (Math.random() - 0.5) * 200 + 'px');
+                heart.style.animationDelay = (i * 0.1) + 's';
+                finalResponse.appendChild(heart);
+            }
+        }
+
+        /**
+         * Maneja el botón "No" - se mueve aleatoriamente
+         */
+        function handleNoHover() {
+            const btnNo = document.getElementById('btnNo');
+            const maxX = window.innerWidth - 150;
+            const maxY = window.innerHeight - 60;
+
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+
+            btnNo.style.position = 'fixed';
+            btnNo.style.left = randomX + 'px';
+            btnNo.style.top = randomY + 'px';
+        }
+
+        /**
+         * Maneja la música
+         */
+        function toggleMusic() {
+            const musicToggle = document.getElementById('musicToggle');
+            const audio = document.getElementById('musicPlayer');
+
+            musicActive = !musicActive;
+
+            if (musicActive) {
+                musicToggle.style.background = 'linear-gradient(135deg, #FF69B4 0%, #FF1493 100%)';
+                // Intentar reproducir música
+                audio.play().catch(err => {
+                    console.log('No se pudo reproducir la música automáticamente');
+                    // Mostrar un mensaje al usuario si lo deseas
+                });
+            } else {
+                musicToggle.style.background = 'linear-gradient(135deg, #FF1493 0%, #FFB6D9 100%)';
+                audio.pause();
+                audio.currentTime = 0;
+            }
+        }
+
+        /**
+         * Inicializa todos los event listeners
+         */
+        function initEventListeners() {
+            const btnYes = document.getElementById('btnYes');
+            const btnNo = document.getElementById('btnNo');
+            const musicToggle = document.getElementById('musicToggle');
+
+            btnYes.addEventListener('click', handleYesClick);
+
+            // El botón No se mueve en hover y en touch
+            btnNo.addEventListener('mouseover', handleNoHover);
+            btnNo.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                handleNoHover();
+            });
+
+            musicToggle.addEventListener('click', toggleMusic);
+        }
+
+        /**
+         * Función de inicialización principal
+         */
+        function init() {
+            // Establecer texto romántico personalizable
+            document.getElementById('romanticText').textContent = CONFIG.romanticText;
+            document.getElementById('finalResponse').querySelector('.final-message').textContent = CONFIG.finalMessage;
+
+            // Iniciar música (opcional)
+            const audio = document.getElementById('musicPlayer');
+            if (CONFIG.musicUrl) {
+                audio.src = CONFIG.musicUrl;
+            }
+
+            // Inicializar elementos
+            initFloatingHearts();
+            createPetals();
+            initEventListeners();
+
+            // Actualizar contador cada segundo
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+
+            // Reproducir animación de gota automáticamente
+            setTimeout(() => {
+                const waterDrop = document.querySelector('.water-drop');
+                waterDrop.style.animation = 'drop-fall 2s ease-in forwards';
+            }, 300);
+        }
+
+        // Iniciar cuando el DOM esté listo
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    </script>
 </body>
 </html>
